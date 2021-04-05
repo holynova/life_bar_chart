@@ -1,22 +1,5 @@
-const mockArr = [
-  {
-    name: "李白",
-    start: 701,
-    end: 762,
-  },
-
-  {
-    name: "苏轼",
-    start: 1037,
-    end: 1101,
-  },
-
-  {
-    name: "白居易",
-    start: 772,
-    end: 846,
-  },
-]
+import { log } from "../../../common/utils/debug"
+import { colorList1, colorList2, mockArr, genColorList } from "./constants"
 
 const random = {
   between(min = 0, max = 100) {
@@ -79,26 +62,32 @@ class LifeBar {
   }
 
   convertX(origin: number) {
-    return Math.floor(
-      ((origin - this.min) * this.canvasWidth) / (this.max - this.min)
-    )
+    return Math.floor((origin * this.canvasWidth) / (this.max - this.min))
   }
 
   getRect(item: Person, itemIndex: number) {
-    let x = this.convertX(item.start)
+    let x = this.convertX(item.start - this.min)
     let y = itemIndex * (this.rowHeight + this.gutter)
-    let w = item.end - item.start
+    let w = this.convertX(item.end - item.start)
     let h = this.rowHeight
     return [x, y, w, h]
   }
 
   getRectList() {
-    let rectList = this.list.map((item, index) => this.getRect(item, index))
+    const colorList = genColorList(3)
+    // log(genColorList())
+    let rectList = this.list.map((item, index) => {
+      return {
+        text: `${item.name} (${item.start} - ${item.end})`,
+        color: colorList[index % colorList.length],
+        rect: this.getRect(item, index),
+      }
+    })
     return rectList
   }
 
   formatInput(arr: any[]) {
-    return genRandom(20).sort((a, b) => a.start - b.start)
+    return genRandom(100).sort((a, b) => a.start - b.start)
     // return mockArr
   }
 }
