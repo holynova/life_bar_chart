@@ -1,10 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import HomePage from './pages/HomePage/HomePage';
+import React from "react"
+import logo from "./logo.svg"
+import "./App.css"
+import HomePage from "./pages/HomePage/HomePage"
 
 function App() {
-  return <HomePage></HomePage>
+  return (
+    <div style={{ backgroundColor: "#eee" }}>
+      <HomePage></HomePage>
+    </div>
+  )
   return (
     <div className="App">
       <header className="App-header">
@@ -22,7 +26,7 @@ function App() {
         </a>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
