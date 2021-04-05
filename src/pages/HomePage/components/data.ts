@@ -180,4 +180,5 @@ export const dynastyList: BarDataModel[] = [
   { name: "元朝", start: 1260, end: 1368 },
   { name: "明", start: 1368, end: 1644 },
   { name: "清", start: 1644, end: 1911 },
+  // { name: "PRC", start: 1949, end: 0 },
 ]

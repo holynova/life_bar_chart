@@ -96,7 +96,9 @@ class LifeBar {
     // log(genColorList())
     let rectList = this.list.map((item, index) => {
       return {
-        text: `${item.name} (${item.start} 到 ${item.end})`,
+        text: `${item.name}(${item.start}|${item.end})`
+          .replace(/-/g, "前")
+          .replace("|", "-"),
         color: colorList[index % colorList.length],
         rect: this.getRect(item, index),
       }
