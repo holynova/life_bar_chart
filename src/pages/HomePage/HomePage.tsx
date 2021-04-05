@@ -3,20 +3,24 @@ import React, { useState, useCallback, useEffect, useRef } from "react"
 import DebugPanel from "../../common/components/DebugPanel"
 import { log } from "../../common/utils/debug"
 import LifeBar from "./components/LifeBar"
+import { dynastyList } from "./components/data"
 
 // import {} from 'antd'
 // import './HomePage.less'
 // import  {log} from ''
 interface Props {}
+const dataList = dynastyList
 
+const rowHeight = 32
+const gutter = Math.max(Math.floor(rowHeight / 4), 1)
 const canvasProps = {
   width: 1000,
-  height: 800,
   style: {
     border: "1px solid red",
   },
-  gutter: 10,
-  rowHeight: 32,
+  gutter,
+  rowHeight,
+  height: (rowHeight + gutter) * dataList.length,
 }
 
 let lb: LifeBar
@@ -34,10 +38,11 @@ const HomePage: React.FC<Props> = (props) => {
 
   const initCanvas = useCallback(() => {
     lb = new LifeBar({
-      arr: [],
+      arr: dataList,
       canvasWidth: canvasProps.width,
       gutter: canvasProps.gutter,
       rowHeight: canvasProps.rowHeight,
+      isMock: false,
     })
     if (canvasRef.current) {
       let myCtx: CanvasRenderingContext2D | null = canvasRef.current.getContext(
@@ -51,13 +56,14 @@ const HomePage: React.FC<Props> = (props) => {
 
   const draw = useCallback(() => {
     if (ctx) {
-      lb = new LifeBar({
-        arr: [],
-        canvasWidth: canvasProps.width,
-        gutter: canvasProps.gutter,
-        rowHeight: canvasProps.rowHeight,
-      })
-      ctx.fillStyle = "green"
+      // lb = new LifeBar({
+      //   arr: [],
+      //   canvasWidth: canvasProps.width,
+      //   gutter: canvasProps.gutter,
+      //   rowHeight: canvasProps.rowHeight,
+      // })
+      ctx.fillStyle = "white"
+      ctx.fillRect(0, 0, canvasProps.width / 0.8, canvasProps.height)
       const fontSize = canvasProps.rowHeight * 0.5
       ctx.font = `${fontSize}px sans`
       lb.rectList.forEach((x) => {
