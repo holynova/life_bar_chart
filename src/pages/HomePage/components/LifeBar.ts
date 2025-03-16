@@ -98,18 +98,22 @@ class LifeBar {
     return [x, y, w, h];
   }
 
-  getRectList({
-    showAge = false,
-    showName = true,
-    showStartAndEnd = false,
-  }: IBarConfig) {
+  getRectList(config?: IBarConfig) {
+    const {
+      showName = true,
+      showAge = false,
+      showStartAndEnd = false,
+    } = config || {};
     const colorList = genColorList(3);
     // log(genColorList())
     let rectList = this.list.map((item, index) => {
+      const name = showName ? item.name : "";
+      const age = showAge ? String(item.end - item.start) : "";
+      const startAndEnd = showStartAndEnd
+        ? `(${item.start}|${item.end})`.replace(/-/g, "前").replace("|", "-")
+        : "";
       return {
-        text: `${item.name}(${item.start}|${item.end})`
-          .replace(/-/g, "前")
-          .replace("|", "-"),
+        text: `${name} ${age} ${startAndEnd}`,
         color: colorList[index % colorList.length],
         rect: this.getRect(item, index),
       };
