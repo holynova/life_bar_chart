@@ -1,20 +1,20 @@
 export function genColorList(n = 6, alpha = 0.3) {
-  let res = []
+  let res = [];
   // let n = 6
   for (var i = 0; i < n; i++) {
     for (var j = 0; j < n; j++) {
       for (var k = 0; k < n; k++) {
-        let r = Math.floor(255 - (255 / n) * i)
-        let g = Math.floor(255 - (255 / n) * j)
-        let b = Math.floor(255 - (255 / n) * k)
-        res.push(`rgba(${r},${g},${b},${alpha})`)
+        let r = Math.floor(255 - (255 / n) * i);
+        let g = Math.floor(255 - (255 / n) * j);
+        let b = Math.floor(255 - (255 / n) * k);
+        res.push(`rgba(${r},${g},${b},${alpha})`);
       }
     }
   }
-  return res
+  return res;
 }
 
-export const colorList1 = genColorList(6)
+export const colorList1 = genColorList(6);
 export const colorList2 = [
   "#FF0000",
   "#FFA07A",
@@ -157,7 +157,7 @@ export const colorList2 = [
   "#708090",
   "#2F4F4F",
   "#000000",
-]
+];
 
 export const mockArr = [
   {
@@ -177,4 +177,4 @@ export const mockArr = [
     start: 772,
     end: 846,
   },
-]
+];

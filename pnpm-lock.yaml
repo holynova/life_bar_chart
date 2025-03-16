@@ -44,6 +44,10 @@ importers:
       web-vitals:
         specifier: ^1.1.1
         version: 1.1.2
+    devDependencies:
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
 
 packages:
 
@@ -4826,6 +4830,11 @@ packages:
   prepend-http@1.0.4:
     resolution: {integrity: sha512-PhmXi5XmoyKw1Un4E+opM2KcsJInDvKyuOumcjjw3waw86ZNjHwVUOOWLc4bCzLdcKNaWBH9e99sbWzDQsVaYg==, tarball: https://registry.npmmirror.com/prepend-http/-/prepend-http-1.0.4.tgz}
     engines: {node: '>=0.10.0'}
+
+  prettier@3.5.3:
+    resolution: {integrity: sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==, tarball: https://registry.npmmirror.com/prettier/-/prettier-3.5.3.tgz}
+    engines: {node: '>=14'}
+    hasBin: true
 
   pretty-bytes@5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==, tarball: https://registry.npmmirror.com/pretty-bytes/-/pretty-bytes-5.6.0.tgz}
@@ -13068,6 +13077,8 @@ snapshots:
   prelude-ls@1.2.1: {}
 
   prepend-http@1.0.4: {}
+
+  prettier@3.5.3: {}
 
   pretty-bytes@5.6.0: {}
 

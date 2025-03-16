@@ -1,5 +1,5 @@
 // import { log } from "../../../common/utils/debug"
-import { BarDataModel } from "./LifeBar"
+import { BarDataModel } from "./LifeBar";
 const raw = `
 1. 夏朝 前2100年 - 前1600年 
 　　2. 商朝 前1600年 - 前1066年 
@@ -75,7 +75,7 @@ const raw = `
 　　5. 金朝 1115年 - 1234年 
 　　14. 元朝 1260年 - 1368年 
 　明 1368 - 1644 
-　　清 1644 - 1911`
+　　清 1644 - 1911`;
 
 // function main(input: string) {
 //   return input
@@ -101,7 +101,7 @@ const raw = `
 //       }
 //     })
 // }
-const log = console.log.bind(console)
+const log = console.log.bind(console);
 // log(main(raw))
 
 export const dynastyList: BarDataModel[] = [
@@ -181,4 +181,147 @@ export const dynastyList: BarDataModel[] = [
   { name: "明", start: 1368, end: 1644 },
   { name: "清", start: 1644, end: 1911 },
   // { name: "PRC", start: 1949, end: 0 },
-]
+];
+
+export const chinaList2 = [
+  { name: "夏", start: -2070, end: -1600 },
+  { name: "商", start: -1600, end: -1046 },
+  { name: "周", start: -1046, end: -256, children: ["西周", "东周"] },
+  { name: "西周", start: -1046, end: -771 },
+  { name: "东周", start: -770, end: -256, children: ["春秋", "战国"] },
+  { name: "春秋", start: -770, end: -476 },
+  { name: "战国", start: -475, end: -221 },
+  { name: "秦", start: -221, end: -207 },
+  {
+    name: "汉",
+    start: -202,
+    end: 220,
+    children: ["西汉", "新", "玄汉", "东汉"],
+  },
+  { name: "西汉", start: -202, end: 8 },
+  { name: "新", start: 8, end: 23 },
+  { name: "玄汉", start: 23, end: 25 },
+  { name: "东汉", start: 25, end: 220 },
+  { name: "三国", start: 220, end: 280, children: ["曹魏", "蜀汉", "孙吴"] },
+  { name: "曹魏", start: 220, end: 265 },
+  { name: "蜀汉", start: 221, end: 263 },
+  { name: "孙吴", start: 229, end: 280 },
+  { name: "晋", start: 265, end: 420, children: ["西晋", "东晋"] },
+  { name: "西晋", start: 265, end: 316 },
+  { name: "东晋", start: 317, end: 420 },
+  {
+    name: "十六国",
+    start: 304,
+    end: 439,
+    children: [
+      "成汉",
+      "前赵",
+      "后赵",
+      "前凉",
+      "前燕",
+      "前秦",
+      "后秦",
+      "后燕",
+      "西秦",
+      "后凉",
+      "南凉",
+      "南燕",
+      "西凉",
+      "胡夏",
+      "北燕",
+      "北凉",
+    ],
+  },
+  { name: "成汉", start: 304, end: 347 },
+  { name: "前赵", start: 304, end: 329 },
+  { name: "后赵", start: 319, end: 351 },
+  { name: "前凉", start: 301, end: 376 },
+  { name: "前燕", start: 337, end: 370 },
+  { name: "前秦", start: 351, end: 394 },
+  { name: "后秦", start: 384, end: 417 },
+  { name: "后燕", start: 384, end: 407 },
+  { name: "西秦", start: 385, end: 431 },
+  { name: "后凉", start: 386, end: 403 },
+  { name: "南凉", start: 397, end: 414 },
+  { name: "南燕", start: 398, end: 410 },
+  { name: "西凉", start: 400, end: 421 },
+  { name: "胡夏", start: 407, end: 431 },
+  { name: "北燕", start: 407, end: 436 },
+  { name: "北凉", start: 397, end: 439 },
+  {
+    name: "南北朝",
+    start: 386,
+    end: 589,
+    children: [
+      "刘宋",
+      "南齐",
+      "南梁",
+      "南陈",
+      "北魏",
+      "东魏",
+      "西魏",
+      "北齐",
+      "北周",
+    ],
+  },
+  { name: "刘宋", start: 420, end: 479 },
+  { name: "南齐", start: 479, end: 502 },
+  { name: "南梁", start: 502, end: 557 },
+  { name: "南陈", start: 557, end: 589 },
+  { name: "北魏", start: 386, end: 534 },
+  { name: "东魏", start: 534, end: 550 },
+  { name: "西魏", start: 535, end: 556 },
+  { name: "北齐", start: 550, end: 577 },
+  { name: "北周", start: 557, end: 581 },
+  { name: "隋", start: 581, end: 618 },
+  { name: "唐", start: 618, end: 907 },
+  { name: "武周", start: 690, end: 705 },
+  {
+    name: "五代",
+    start: 907,
+    end: 960,
+    children: ["后梁", "后唐", "后晋", "后汉", "后周"],
+  },
+  { name: "后梁", start: 907, end: 923 },
+  { name: "后唐", start: 923, end: 936 },
+  { name: "后晋", start: 936, end: 947 },
+  { name: "后汉", start: 947, end: 950 },
+  { name: "后周", start: 951, end: 960 },
+  {
+    name: "十国",
+    start: 902,
+    end: 979,
+    children: [
+      "南吴",
+      "南唐",
+      "吴越",
+      "闽",
+      "南楚",
+      "南汉",
+      "南平",
+      "北汉",
+      "前蜀",
+      "后蜀",
+    ],
+  },
+  { name: "南吴", start: 902, end: 937 },
+  { name: "南唐", start: 937, end: 975 },
+  { name: "吴越", start: 907, end: 978 },
+  { name: "闽", start: 909, end: 945 },
+  { name: "南楚", start: 907, end: 951 },
+  { name: "南汉", start: 917, end: 971 },
+  { name: "南平", start: 924, end: 963 },
+  { name: "北汉", start: 951, end: 979 },
+  { name: "前蜀", start: 907, end: 925 },
+  { name: "后蜀", start: 934, end: 965 },
+  { name: "宋", start: 960, end: 1279, children: ["北宋", "南宋"] },
+  { name: "北宋", start: 960, end: 1127 },
+  { name: "南宋", start: 1127, end: 1279 },
+  { name: "辽", start: 907, end: 1125 },
+  { name: "西辽", start: 1124, end: 1218 },
+  { name: "西夏", start: 1038, end: 1227 },
+  { name: "金", start: 1115, end: 1234 },
+  { name: "元", start: 1271, end: 1368 },
+  { name: "明", start: 1368, end: 1644 },
+  { name: "清", start: 1636, end: 1912 },
+];

@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect, useRef } from "react"
-import LifeBarChart from "./components/LifeBarChart"
+import React, { useState, useCallback, useEffect, useRef } from "react";
+import LifeBarChart from "./components/LifeBarChart";
 // import {} from 'antd'
 // import './HomePage.less'
 // import  {log} from ''
@@ -12,7 +12,7 @@ const HomePage: React.FC<Props> = (props) => {
       <h3>HomePage</h3>
       <LifeBarChart></LifeBarChart>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
