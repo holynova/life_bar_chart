@@ -1,50 +1,55 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  useMemo,
+} from "react";
 
 import DebugPanel from "../../../common/components/DebugPanel";
 import { log } from "../../../common/utils/debug";
-import LifeBar from ".././components/LifeBar";
+import LifeBar, { BarDataModel } from ".././components/LifeBar";
 import { dynastyList, chinaList2, chinaList3 } from "../components/data";
 import { mockArr } from "./constants";
 
 // import {} from 'antd'
 // import './LifeBarChart.less'
 // import  {log} from ''
-interface Props {}
-const dataList = chinaList2;
+interface Props {
+  folded: boolean;
+  dataList: BarDataModel[];
+}
 
-const rowHeight = 32;
-const gutter = Math.max(Math.floor(rowHeight / 4), 1);
-const canvasProps = {
-  width: 1000,
-  style: {
-    border: "1px solid red",
-  },
-  gutter,
-  rowHeight,
-  height: (rowHeight + gutter) * dataList.length,
-};
-
-let lb: LifeBar;
+let lifeBar: LifeBar;
 
 const LifeBarChart: React.FC<Props> = (props) => {
   // const [count, setCount] = useState(0)
   const [ready, setReady] = useState(false);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    initCanvas();
-    draw();
-  }, []);
-
+  const dataList = props.dataList;
+  const canvasProps = useMemo(() => {
+    const rowHeight = 32;
+    const gutter = Math.max(Math.floor(rowHeight / 4), 1);
+    return {
+      style: {
+        // border: "1px solid red",
+      },
+      gutter,
+      rowHeight,
+      height: (rowHeight + gutter) * dataList.length,
+      width: 1024,
+    };
+  }, [dataList.length]);
   const initCanvas = useCallback(() => {
-    lb = new LifeBar({
-      arr: chinaList3.filter((x) => x.type === "main"),
+    lifeBar = new LifeBar({
+      // arr: chinaList3.filter((x) => x.type === "main"),
+      arr: dataList,
       canvasWidth: canvasProps.width,
       gutter: canvasProps.gutter,
       rowHeight: canvasProps.rowHeight,
       isMock: false,
-      folded: true,
+      folded: props.folded,
       // isMock: true,
     });
     if (canvasRef.current) {
@@ -54,21 +59,21 @@ const LifeBarChart: React.FC<Props> = (props) => {
       setReady(true);
       setCtx(myCtx);
     }
-  }, []);
+  }, [
+    canvasProps.gutter,
+    canvasProps.rowHeight,
+    canvasProps.width,
+    dataList,
+    props.folded,
+  ]);
 
   const draw = useCallback(() => {
     if (ctx) {
-      // lb = new LifeBar({
-      //   arr: [],
-      //   canvasWidth: canvasProps.width,
-      //   gutter: canvasProps.gutter,
-      //   rowHeight: canvasProps.rowHeight,
-      // })
       ctx.fillStyle = "white";
       ctx.fillRect(0, 0, canvasProps.width, canvasProps.height);
       const fontSize = canvasProps.rowHeight * 0.5;
       ctx.font = `${fontSize}px sans`;
-      lb.rectList.forEach((x) => {
+      lifeBar.rectList.forEach((x) => {
         // log("x=", x)
         ctx.fillStyle = x.color;
         ctx.strokeRect.apply(ctx, x.rect);
@@ -86,14 +91,19 @@ const LifeBarChart: React.FC<Props> = (props) => {
     } else {
       log("ctx 不存在");
     }
-  }, [ctx]);
+  }, [canvasProps.height, canvasProps.rowHeight, canvasProps.width, ctx]);
+
+  useEffect(() => {
+    initCanvas();
+    draw();
+  }, [draw, initCanvas, props.folded]);
 
   return (
     <div style={{ width: "90%", margin: "0 auto", backgroundColor: "#fff" }}>
       {/* <h3>LifeBarChart</h3> */}
       {ready ? (
         <div>
-          <button onClick={draw}>draw</button>
+          {/* <button onClick={draw}>draw</button> */}
           {/* <DebugPanel data={lb?.rectList}></DebugPanel> */}
         </div>
       ) : (

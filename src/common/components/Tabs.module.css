@@ -1,0 +1,30 @@
+.tabs {
+  width: 100%;
+}
+
+.tabs-nav {
+  display: flex;
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 16px;
+}
+
+.tab-nav-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
+  margin-right: 32px;
+}
+
+.tab-nav-item:hover {
+  color: #1890ff;
+}
+
+.tab-nav-item.active {
+  color: #1890ff;
+  border-bottom-color: #1890ff;
+}
+
+.tabs-content {
+  padding: 8px 0;
+}

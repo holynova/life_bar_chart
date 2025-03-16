@@ -182,7 +182,7 @@ class LifeBar {
   getTitle(item: BarDataModel, config?: IBarConfig) {
     const {
       showName = true,
-      showAge = false,
+      showAge = true,
       showStartAndEnd = false,
     } = config || {};
     const name = showName ? item.name : "";
@@ -194,9 +194,11 @@ class LifeBar {
   }
 
   getRectList(config?: IBarConfig) {
+    const newList = [...this.list].sort((a, b) => a.start - b.start);
+
     const colorList = genColorList(3);
     // log(genColorList())
-    let rectList = this.list.map((item, index) => {
+    let rectList = newList.map((item, index) => {
       return {
         text: this.getTitle(item, config),
         color: colorList[index % colorList.length],
