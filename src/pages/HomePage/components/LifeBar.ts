@@ -32,12 +32,19 @@ export interface BarDataModel {
   end: number;
 }
 
+interface IRow {
+  start: number;
+  end: number;
+  children: BarDataModel[];
+}
+
 export interface InitDataModel {
   arr?: BarDataModel[];
   rowHeight?: number;
   gutter?: number;
   canvasWidth?: number;
   isMock?: boolean;
+  folded?: boolean;
 }
 
 interface IBarConfig {
@@ -55,6 +62,7 @@ class LifeBar {
   gutter: number;
   rectList: any[];
   isMock: boolean;
+  folded: boolean;
 
   constructor(props: InitDataModel) {
     // const {} = props
@@ -73,9 +81,14 @@ class LifeBar {
     this.gutter = gutter;
     this.canvasWidth = canvasWidth;
     this.isMock = isMock;
+    this.folded = props?.folded ?? false;
 
     this.init(arr);
-    this.rectList = this.getRectList();
+    if (this.folded) {
+      this.rectList = this.getFoldedRectList();
+    } else {
+      this.rectList = this.getRectList();
+    }
   }
 
   init(arr: BarDataModel[]) {
@@ -90,30 +103,102 @@ class LifeBar {
     return Math.floor((origin * this.canvasWidth) / (this.max - this.min));
   }
 
-  getRect(item: BarDataModel, itemIndex: number) {
+  getRect(item: BarDataModel, itemIndex: number, row?: number) {
     let x = this.convertX(item.start - this.min);
-    let y = itemIndex * (this.rowHeight + this.gutter);
+    let y =
+      (row === undefined ? itemIndex : row) * (this.rowHeight + this.gutter);
     let w = this.convertX(item.end - item.start);
     let h = this.rowHeight;
     return [x, y, w, h];
   }
 
-  getRectList(config?: IBarConfig) {
+  groupListByRow() {
+    const newList = [...this.list].sort((a, b) => a.start - b.start);
+    const rows: IRow[] = [
+      {
+        start: 0,
+        end: 0,
+        children: [],
+      },
+    ];
+    // const row = {
+    //   start: 0,
+    //   end: 0,
+    //   children: [{ name: "name", start: 1, end: 100 }],
+    // };
+    // for (let i = 0; i < newList.length; i++) {
+    //   const item = newList[i];
+    //   if (item.start > row.end) {
+    //     rows.push(row);
+    //     row.start = item.start;
+    //     row.end = item.end;
+    //     row.children = [item];
+    //   } else {
+    //     row.end = Math.max(row.end, item.end);
+    //   }
+    // }
+    newList.forEach((x) => {
+      let inserted = false;
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        if (x.start >= row.end) {
+          row.children.push(x);
+          row.end = x.end;
+          inserted = true;
+          break;
+        }
+      }
+      if (!inserted) {
+        rows.push({ start: x.start, end: x.end, children: [x] });
+      }
+    });
+    return rows;
+  }
+
+  getFoldedRectList(config?: IBarConfig) {
+    const colorList = genColorList(3);
+
+    const rows = this.groupListByRow();
+    let rectList: unknown[] = [];
+    let itemCnt = 0;
+    rows.forEach((row, rowIndex) => {
+      row.children.forEach((x: BarDataModel) => {
+        rectList.push({
+          text: this.getTitle(x, config),
+          color: colorList[itemCnt % colorList.length],
+          rect: this.getRect(x, itemCnt, rowIndex),
+        });
+        itemCnt += 1;
+      });
+    });
+    console.log(
+      "kkk",
+      JSON.stringify({ rows, rectList, list: this.list }, null, 2),
+    );
+
+    return rectList;
+  }
+
+  getTitle(item: BarDataModel, config?: IBarConfig) {
     const {
       showName = true,
       showAge = false,
       showStartAndEnd = false,
     } = config || {};
+    const name = showName ? item.name : "";
+    const age = showAge ? String(item.end - item.start) : "";
+    const startAndEnd = showStartAndEnd
+      ? `(${item.start}|${item.end})`.replace(/-/g, "前").replace("|", "-")
+      : "";
+    return `${name} ${age} ${startAndEnd}`;
+  }
+
+  getRectList(config?: IBarConfig) {
     const colorList = genColorList(3);
     // log(genColorList())
     let rectList = this.list.map((item, index) => {
-      const name = showName ? item.name : "";
-      const age = showAge ? String(item.end - item.start) : "";
-      const startAndEnd = showStartAndEnd
-        ? `(${item.start}|${item.end})`.replace(/-/g, "前").replace("|", "-")
-        : "";
       return {
-        text: `${name} ${age} ${startAndEnd}`,
+        text: this.getTitle(item, config),
         color: colorList[index % colorList.length],
         rect: this.getRect(item, index),
       };

@@ -3,7 +3,8 @@ import React, { useState, useCallback, useEffect, useRef } from "react";
 import DebugPanel from "../../../common/components/DebugPanel";
 import { log } from "../../../common/utils/debug";
 import LifeBar from ".././components/LifeBar";
-import { dynastyList, chinaList2 } from "../components/data";
+import { dynastyList, chinaList2, chinaList3 } from "../components/data";
+import { mockArr } from "./constants";
 
 // import {} from 'antd'
 // import './LifeBarChart.less'
@@ -38,11 +39,13 @@ const LifeBarChart: React.FC<Props> = (props) => {
 
   const initCanvas = useCallback(() => {
     lb = new LifeBar({
-      arr: dataList,
+      arr: chinaList3.filter((x) => x.type === "main"),
       canvasWidth: canvasProps.width,
       gutter: canvasProps.gutter,
       rowHeight: canvasProps.rowHeight,
       isMock: false,
+      folded: true,
+      // isMock: true,
     });
     if (canvasRef.current) {
       let myCtx: CanvasRenderingContext2D | null =
