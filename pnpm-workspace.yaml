@@ -1,0 +1,10 @@
+packages: []
+
+allowBuilds:
+  core-js: true
+  core-js-pure: true
+  ejs: true
+  es5-ext: true
+  fsevents: true
+overrides:
+  '@babel/core': 7.26.10

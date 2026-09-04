@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# Cloudflare build artifact (Pages uses the tracked docs/ copy)
+/dist
+
 # production
 /build
 

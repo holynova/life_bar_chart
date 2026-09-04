@@ -1,0 +1,10 @@
+.git
+.github
+.wrangler
+.env*
+node_modules
+build
+docs
+dist-ssr
+package-lock.json
+yarn.lock

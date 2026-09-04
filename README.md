@@ -1,5 +1,7 @@
 # Life Bar Chart 生命时间轴可视化
 
+Cloudflare：<https://life-bar-chart.xiaosang.cc/> · GitHub Pages：<https://holynova.github.io/life_bar_chart/>
+
 一个基于React和Canvas的生命时间轴可视化工具，帮助你更直观地感受时间的流逝和生命的珍贵。
 
 ## 功能特点

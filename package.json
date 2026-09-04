@@ -18,7 +18,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider BUILD_PATH=dist PUBLIC_URL=. react-scripts build",
+    "build:pages": "pnpm run build && node scripts/sync-pages-artifact.mjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
@@ -42,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "7.26.10",
     "prettier": "^3.5.3"
   }
 }
