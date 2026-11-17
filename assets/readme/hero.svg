@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="360" viewBox="0 0 1200 360"
+     role="img" aria-labelledby="title desc">
+  <title id="title">生命时间轴 Life Bar Chart — 中国朝代与唐宋诗词人的甘特图</title>
+  <desc id="desc">暖纸底标题：生命时间轴，副标题一条横条，就是一段人生或一朝国祚；右侧是甘特图示意：夏、商、周、秦、汉、唐六条朝代横条，长度即国祚年数。</desc>
+
+  <rect width="1200" height="360" rx="26" fill="#faf6ef"/>
+
+  <g id="title-block" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="56" y="62" font-size="19" letter-spacing="3" fill="#6b645e">生命时间轴可视化 · LIFE TIMELINE</text>
+    <text x="56" y="128" font-size="62" font-weight="700" fill="#1c1917">生命时间轴</text>
+    <text x="56" y="168" font-size="23" fill="#44403c">LIFE BAR CHART — 一条横条，就是一段人生或一朝国祚</text>
+    <text x="56" y="204" font-size="19" fill="#6b645e">中国朝代与唐宋诗词人，都画成甘特图，一眼看清长短。</text>
+    <g id="chips" font-size="18" fill="#1c1917" text-anchor="middle">
+      <g><rect x="56" y="238" width="126" height="36" rx="18" fill="#ffffff" stroke="#d6d3cd" stroke-width="1.5"/><text x="119" y="262">77 个朝代条目</text></g>
+      <g><rect x="194" y="238" width="162" height="36" rx="18" fill="#ffffff" stroke="#d6d3cd" stroke-width="1.5"/><text x="275" y="262">109 位唐宋诗词人</text></g>
+      <g><rect x="368" y="238" width="144" height="36" rx="18" fill="#ffffff" stroke="#d6d3cd" stroke-width="1.5"/><text x="440" y="262">折叠 / 展开视图</text></g>
+      <g><rect x="524" y="238" width="126" height="36" rx="18" fill="#ffffff" stroke="#d6d3cd" stroke-width="1.5"/><text x="587" y="262">Canvas 甘特图</text></g>
+    </g>
+  </g>
+
+  <g id="gantt" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <g><rect x="800" y="48" width="96" height="28" rx="4" fill="#d9ead3" stroke="#93c47d" stroke-width="1"/><text x="808" y="68" font-size="18" fill="#1c1917">夏 470</text></g>
+    <g><rect x="830" y="90" width="112" height="28" rx="4" fill="#fff2cc" stroke="#e69138" stroke-width="1"/><text x="838" y="110" font-size="18" fill="#1c1917">商 554</text></g>
+    <g><rect x="862" y="132" width="150" height="28" rx="4" fill="#d9d2e9" stroke="#8e7cc3" stroke-width="1"/><text x="870" y="152" font-size="18" fill="#1c1917">周 790</text></g>
+    <g><rect x="894" y="174" width="72" height="28" rx="4" fill="#f4cccc" stroke="#cc0000" stroke-width="1"/><text x="900" y="194" font-size="18" fill="#1c1917">秦 14</text></g>
+    <g><rect x="902" y="216" width="124" height="28" rx="4" fill="#cfe2f3" stroke="#6fa8dc" stroke-width="1"/><text x="910" y="236" font-size="18" fill="#1c1917">汉 422</text></g>
+    <g><rect x="938" y="258" width="100" height="28" rx="4" fill="#fce5cd" stroke="#e69138" stroke-width="1"/><text x="946" y="278" font-size="18" fill="#1c1917">唐 289</text></g>
+    <text x="930" y="326" font-size="18" fill="#6b645e" text-anchor="middle">横条长度 = 年数 · 数字为本项目所标</text>
+  </g>
+</svg>
