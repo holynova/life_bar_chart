@@ -1,91 +1,71 @@
-# Life Bar Chart 生命时间轴可视化
+<p align="right"><a href="README.en.md">English</a></p>
 
-一个基于React和Canvas的生命时间轴可视化工具，帮助你更直观地感受时间的流逝和生命的珍贵。
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="生命时间轴 Life Bar Chart — 一条横条，就是一段人生或一朝国祚；右侧是甘特图示意：夏、商、周、秦、汉、唐六条朝代横条，长度即国祚年数">
+</p>
 
-## 功能特点
+<p align="center">
+  <a href="https://xiaosang.cc/life-bar-chart/">▶ 在线体验</a>
+  ·
+  <a href="https://github.com/holynova/life_bar_chart">GitHub 仓库</a>
+</p>
 
-- 可视化展示生命时间轴
-- 基于Canvas的高性能绘图
-- 支持自定义时间区间和标记
-- 响应式设计，适配多种设备
+生命时间轴是基于 React 和 Canvas 的生命时间轴可视化工具，把中国朝代与唐宋诗词人的存续时间画成甘特图：一条横条就是一个朝代或一位诗人，横条长度即年数，一眼看清谁长谁短、谁与谁同代。
 
-## 技术栈
+## 截图
 
-- TypeScript
-- React 17.x
-- Canvas绘图
-- Prettier（代码格式化）
+<p align="center">
+  <img src="./assets/readme/screenshot-dynasty.jpg" width="720" alt="中国朝代展开视图：夏 470、商 554、周 790、秦 14、汉 422 等横条按时间先后阶梯排列，每条标注朝代名与年数">
+</p>
 
-## 快速开始
+<p align="center">
+  <img src="./assets/readme/screenshot-poets.jpg" width="720" alt="唐宋诗词人视图：陶渊明、唐代、初唐、骆宾王、王勃、宋之问等横条，标注人名与寿命年数">
+</p>
 
-### 环境要求
+## 内容
 
-- Node.js >= 12.x
-- pnpm >= 6.x
+4 个标签页，2 份数据：
 
-### 安装依赖
+| 标签页 | 数据 | 说明 |
+|---|---|---|
+| 中国朝代-折叠 | 77 个朝代条目 | 同时期的朝代折叠到同一行，纵览全局 |
+| 中国朝代 | 77 个朝代条目 | 每条一行，按时间先后阶梯展开 |
+| 唐宋诗词人 | 109 条记录 | 展开视图，一人一行 |
+| 唐宋诗词人 | 109 条记录 | 折叠视图（与上一个标签同名，内容为折叠版） |
+
+- **朝代数据**（`src/pages/HomePage/components/data.ts`）：从夏朝（前 2100 年）到清朝，含西周 / 东周、春秋 / 战国、三国、南北朝、五代十国等子时期；每条标注起止年份与年数，如周 790 年、汉 422 年、秦 14 年。
+- **诗词人数据**（`src/data/poet.ts`）：唐宋诗词人 109 条，含李白（701–762）、杜甫、苏轼、白居易、王维、李清照、辛弃疾等，另有唐代 / 初唐 / 盛唐 / 宋代 / 北宋等朝代标记行作时间参照。
+
+## 渲染
+
+- Canvas 绘制甘特横条：行高 32px，画布宽 1024，横条位置按起止年份在全局时间范围内的比例换算。
+- 折叠视图把时间重叠的条目压到同一行；展开视图每条独占一行。
+- 条目颜色来自内置色板（`constants.ts` 的 `colorList1` / `colorList2`）。
+
+## 本地运行
+
+Create React App 项目（React 17 + react-scripts 4），环境要求 Node.js ≥ 12、pnpm ≥ 6：
 
 ```bash
 pnpm install
+pnpm start    # 开发服务，http://localhost:3000
+pnpm build    # 生产构建，产物在 build/
+pnpm test     # 单元测试
+pnpm format   # Prettier 格式化
 ```
 
-### 开发调试
+## 技术
 
-启动开发服务器：
-
-```bash
-pnpm start
-```
-
-访问 http://localhost:3000 查看应用。
-
-### 构建部署
-
-构建生产环境版本：
-
-```bash
-pnpm build
-```
-
-构建完成后，build目录中包含了可部署的文件。
-
-## 项目结构
+- React 17 + TypeScript 4.2 + Create React App（react-scripts 4.0.3），Canvas 绘图，零图表库。
+- 核心在 `src/pages/HomePage/components/`：`LifeBar.ts` 把起止年份换算成横条坐标（折叠 / 展开两种布局），`LifeBarChart.tsx` 负责 Canvas 绘制，`data.ts` / `src/data/poet.ts` 是两份数据。
 
 ```
-├── public/          # 静态资源
-├── src/             # 源代码
-│   ├── common/      # 公共组件和工具
-│   ├── pages/       # 页面组件
-│   └── App.tsx      # 应用入口
-└── package.json     # 项目配置
+src/pages/HomePage/HomePage.tsx          4 个标签页
+src/pages/HomePage/components/
+  LifeBar.ts                             年份 → 横条坐标换算（折叠/展开）
+  LifeBarChart.tsx                       Canvas 绘制
+  data.ts                                77 个朝代条目
+  constants.ts                           色板
+src/data/poet.ts                         109 条诗词人记录
+src/data/dynasty.ts                      朝代数据（备用）
 ```
-
-## 开发指南
-
-### 代码规范
-
-项目使用Prettier进行代码格式化，运行以下命令格式化代码：
-
-```bash
-pnpm format
-```
-
-### 测试
-
-运行单元测试：
-
-```bash
-pnpm test
-```
-
-## 贡献指南
-
-欢迎提交Issue和Pull Request。在提交PR之前，请确保：
-
-1. 代码经过格式化
-2. 所有测试通过
-3. 遵循现有的代码风格
-
-## 许可证
-
-MIT License
